@@ -173,3 +173,20 @@ func (m *Meta) FileCount() int {
 	}
 	return len(m.Info.Files)
 }
+
+// TrackerURLs returns the primary announce URL first, then all URLs from announce-list (all tiers).
+// Used for tracker retry/backup in Phase 2.
+func (m *Meta) TrackerURLs() []string {
+	var urls []string
+	if m.Announce != "" {
+		urls = append(urls, m.Announce)
+	}
+	for _, tier := range m.AnnounceList {
+		for _, u := range tier {
+			if u != "" {
+				urls = append(urls, u)
+			}
+		}
+	}
+	return urls
+}
