@@ -1,0 +1,57 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch bitswift (valid torrent)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/bitswift",
+      "args": ["testdata/ubuntu-24.04.3-desktop-amd64.iso.torrent"],
+      // "args": ["testdata/valid.torrent"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch bitswift (custom args)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/bitswift",
+      "args": ["${input:torrentPath}"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch bitswift (missing file)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/bitswift",
+      "args": ["missing.torrent"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch bitswift (corrupt file)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/bitswift",
+      "args": ["testdata/corrupt.torrent"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Current Test File",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${workspaceFolder}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "torrentPath",
+      "type": "promptString",
+      "description": "Path to .torrent file (e.g. testdata/valid.torrent)",
+      "default": "testdata/valid.torrent"
+    }
+  ]
+}
